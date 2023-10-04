@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.DotNet.Interactive.Formatting.TabularData;
+@using Microsoft.DotNet.Interactive.Formatting
+@using HtmlAgilityPack
+@code {
+    static RenderFragment ToBlazorHtml(HtmlNode node) =>
+    @<text>
+        @foreach (HtmlNode e in node.ChildNodes)
+        {
+            if (e.NodeType is HtmlNodeType.Element)
+            {
+                var attr = e.Attributes.ToDictionary(k => k.Name, v => (object)v.Value);
+                <BlazorTag Name=@e.Name Attr=attr>@ToBlazorHtml(e)</BlazorTag>
+                continue;
+            }
+            @((MarkupString)e.OuterHtml)
+        }
+    </text>;
+    public static RenderFragment ToBlazorHtml(string html)
+    {
+        var doc = new HtmlDocument();
+        doc.LoadHtml(html);
+        return ToBlazorHtml(doc.DocumentNode);
+    }
+}
