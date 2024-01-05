@@ -5,6 +5,10 @@
     <TargetFrameworks>net7;net8</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
     <Version>1.0.0-beta.24054.2</Version>
     <RepositoryUrl>https://github.com/naratteu/DotNet.Interactive.Formatting.Blazor</RepositoryUrl>
   </PropertyGroup>
